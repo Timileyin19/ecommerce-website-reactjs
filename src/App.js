@@ -76,7 +76,7 @@ const App = () => {
   return (
     <main className="page-wrapper">
       <Router>
-        <div style={{ display: 'flex' }}>
+        {/* <div style={{ display: 'flex' }}> */}
         <CssBaseline />
         <Navbar totalItems={cart.total_items} handleDrawerToggle={handleDrawerToggle} />
         <Switch>
@@ -90,7 +90,7 @@ const App = () => {
             <Checkout cart={cart} order={order} onCaptureCheckout={handleCaptureCheckout} error={errorMessage} />
           </Route>
         </Switch>
-        </div>
+        {/* </div> */}
       </Router>
     </main>
   );
