@@ -2,8 +2,14 @@
 .topbar-dark .topbar-link > .me-2,
 .topbar-dark .topbar-text > .mt-n1,
 .topbar-dark .topbar-link > .mt-n1 {
-  color: #fe696a;
+  color: #00bba0;
   margin-right: 0.375rem;
   font-size: 1.15em;
   vertical-align: middle;
+}
+.spinner-container {
+  height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }

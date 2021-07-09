@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
 import { commerce } from './api/commerce';
 
-import { Navbar, Products , Cart, Checkout } from './components';
+import { Navbar, Products , Cart, Checkout, SigninModal, Landing } from './components';
 
 const App = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -77,10 +77,14 @@ const App = () => {
     <main className="page-wrapper">
       <Router>
         {/* <div style={{ display: 'flex' }}> */}
-        <CssBaseline />
-        <Navbar totalItems={cart.total_items} handleDrawerToggle={handleDrawerToggle} />
+        {/* <CssBaseline /> */}
+        <SigninModal />
+        <Navbar cart={cart} handleDrawerToggle={handleDrawerToggle} />
         <Switch>
-          <Route exact path="/">
+        <Route exact path="/">
+            <Landing />
+          </Route>
+          <Route exact path="/shop">
             <Products products={products} onAddToCart={handleAddToCart} />
           </Route>
           <Route exact path="/cart">

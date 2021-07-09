@@ -1,6 +1,7 @@
 import React from 'react';
 import { Container, Typography, Button, Grid  } from '@material-ui/core';
 import { Link } from 'react-router-dom';
+import Spinner from '../Utility/Spinner';
 
 import CartItem from './CartItem/CartItem';
 import useStyles from './styles';
@@ -18,7 +19,7 @@ function Cart({ cart, onUpdateCartQty, onRemoveFromCart, onEmptyCart }) {
         </Typography>
     );
 
-    if (!cart.line_items) return 'Loading Cart';
+    if (!cart.line_items) return <Spinner />;
 
     const renderCart = () => (
         <>
@@ -48,7 +49,7 @@ function Cart({ cart, onUpdateCartQty, onRemoveFromCart, onEmptyCart }) {
             <div className={classes.toolbar} />
             <Typography className={classes.title} variant="h3" gutterBottom>Shopping Cart</Typography>
             {!cart.line_items.length ? renderEmptyCart() : renderCart()}
-        </Container>
+        </Container> 
     );
 };
 
