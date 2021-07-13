@@ -1,7 +1,24 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const CartDropdown = ({ product }) => {
+const CartDropdown = ({ product, handleRemoveFromCartWithItemName }) => {
+
+    
+const onRemoveFromCart = (item_name) => {
+    handleRemoveFromCartWithItemName(item_name)
+} 
+    
+
+function page_click(e) {
+    if (e.path[1].parentElement.classList[0] === 'widget-cart-item') {
+      let myText = e.path[1].parentElement.innerText;
+      let newText = myText.split('₦');
+      let nameOfItem = newText[0].substring(2);
+      onRemoveFromCart(nameOfItem)
+  }
+}
+window.onclick = page_click;
+
     return (
         <div className="widget-cart-item pb-2 border-bottom">
             <button className="btn-close text-danger" type="button" aria-label="Remove">

@@ -13,7 +13,7 @@ import CartDropdown from './CartDropdown/CartDropdown';
 import logo from '../../assests/LogoDark.png';
 import useStyles from './styles';
 
-const PrimarySearchBar = ({ cart }) => {
+const PrimarySearchBar = ({ cart, handleRemoveFromCartWithItemName }) => {
     const [mobileMoreAnchorE1, setMobileMoreAnchorE1] = useState(null);
     const [subtotal, setSubtotal] = useState(null);
     const location = useLocation();
@@ -21,8 +21,6 @@ const PrimarySearchBar = ({ cart }) => {
     const isMobileMenuOpen = Boolean(mobileMoreAnchorE1)
     const mobileMenuId = 'primary-search-account-menu-mobile';
     const handleMobileMenuClose = () => setMobileMoreAnchorE1(null)
-
-    // console.log(cart);
 
     useEffect(() => {
       const setItemSubtotal = () => {
@@ -37,6 +35,8 @@ const PrimarySearchBar = ({ cart }) => {
       }
       setItemSubtotal();
     }, [])
+
+
 
     // const renderMobileMenu = (
     //     <Menu
@@ -117,7 +117,7 @@ const PrimarySearchBar = ({ cart }) => {
               <div className="widget widget-cart px-3 pt-2 pb-3" style={{width: '20rem'}}>
                 <div data-simplebar data-simplebar-auto-hide="false">
                   { cart.line_items ? ( cart.line_items.map((product) => (
-                      <CartDropdown key={product.id} product={product} />
+                      <CartDropdown key={product.id} product={product} handleRemoveFromCartWithItemName={handleRemoveFromCartWithItemName} />
                   )) ) : null }
                   </div>
                 <div className="d-flex flex-wrap justify-content-between align-items-center py-3">

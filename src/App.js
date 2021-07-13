@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
 import { commerce } from './api/commerce';
 
-import { Navbar, Products , Cart, Checkout, SigninModal, Landing } from './components';
+import { Navbar, Products , Cart, Checkout, SigninModal, Landing, QuickViewModal } from './components';
 
 const App = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -66,6 +66,23 @@ const App = () => {
     }
   };
 
+  const handleRemoveFromCartWithItemName = (item_name) => {
+    let item_id;
+    let newItemName = item_name.slice(0, -1);
+    cart.line_items.map((item) => {
+      if (item.name === newItemName) {
+        item_id = item.id
+      }
+    })
+    if (item_id) {
+      handleRemoveFromCart(item_id);
+    }
+  }
+
+  const getSingleProduct = () => {
+    if (products.length > 0) return products[0];
+  }
+
   useEffect(() => {
     fetchCart();
     fectchProducts();
@@ -79,10 +96,11 @@ const App = () => {
         {/* <div style={{ display: 'flex' }}> */}
         {/* <CssBaseline /> */}
         <SigninModal />
-        <Navbar cart={cart} handleDrawerToggle={handleDrawerToggle} />
+        <QuickViewModal product={getSingleProduct()} />
+        <Navbar cart={cart} handleRemoveFromCartWithItemName={handleRemoveFromCartWithItemName} />
         <Switch>
         <Route exact path="/">
-            <Landing />
+            <Landing products={products} onAddToCart={handleAddToCart} />
           </Route>
           <Route exact path="/shop">
             <Products products={products} onAddToCart={handleAddToCart} />
