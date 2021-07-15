@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
 import { commerce } from './api/commerce';
 
-import { Navbar, Products , Cart, Checkout, SigninModal, Landing, QuickViewModal } from './components';
+import { Navbar, Products , Cart, Checkout, SigninModal, Landing, ProductDetails, Footer } from './components';
 
 const App = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -79,9 +79,7 @@ const App = () => {
     }
   }
 
-  const getSingleProduct = () => {
-    if (products.length > 0) return products[0];
-  }
+  
 
   useEffect(() => {
     fetchCart();
@@ -96,7 +94,6 @@ const App = () => {
         {/* <div style={{ display: 'flex' }}> */}
         {/* <CssBaseline /> */}
         <SigninModal />
-        <QuickViewModal product={getSingleProduct()} />
         <Navbar cart={cart} handleRemoveFromCartWithItemName={handleRemoveFromCartWithItemName} />
         <Switch>
         <Route exact path="/">
@@ -105,13 +102,20 @@ const App = () => {
           <Route exact path="/shop">
             <Products products={products} onAddToCart={handleAddToCart} />
           </Route>
+          <Route exact path="/product/:id">
+            <ProductDetails addToCart={handleAddToCart} />
+          </Route>
           <Route exact path="/cart">
             <Cart cart={cart} onUpdateCartQty={handleUpdateCartQty} onRemoveFromCart={handleRemoveFromCart} onEmptyCart={handleEmptyCart} />
           </Route>
           <Route exact path="/checkout">
             <Checkout cart={cart} order={order} onCaptureCheckout={handleCaptureCheckout} error={errorMessage} />
           </Route>
+          <Route path='*'>
+              { 'Not found page' }
+          </Route>
         </Switch>
+        <Footer />
         {/* </div> */}
       </Router>
     </main>

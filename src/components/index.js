@@ -5,3 +5,5 @@ export { default as Checkout } from './CheckoutForm/Checkout/Checkout';
 export { default as SigninModal } from './Modals/SignInModal';
 export { default as QuickViewModal } from './Modals/QuickViewModal';
 export { default as Landing } from './Landing/Landing';
+export { default as ProductDetails } from './Products/Product/ProductDetails';
+export { default as Footer } from './Footer/Footer';

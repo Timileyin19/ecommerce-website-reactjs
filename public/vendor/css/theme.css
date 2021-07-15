@@ -4526,10 +4526,11 @@ fieldset:disabled .btn {
   float: left;
   padding-right: 0.5rem;
   color: #a6acb7;
-  content: var(
+  /* content: var(
     --bs-breadcrumb-divider,
     ""
-  ); /* rtl: var(--bs-breadcrumb-divider, "") */
+  );  */
+  /* rtl: var(--bs-breadcrumb-divider, "") */
 }
 .breadcrumb-item.active {
   color: #7d879c;
@@ -13043,7 +13044,7 @@ input[type="search"]::-webkit-search-results-decoration {
 .btn-social {
   display: inline-block;
   width: 2.25rem;
-  height: 2.25rem;
+  height: 1.6rem;
   padding: 0;
   border: 1px solid transparent;
   transition: border-color 0.25s ease-in-out, background-color 0.25s ease-in-out,

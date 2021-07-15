@@ -37,7 +37,11 @@ const Product = ({ product, onAddToCart }) => {
         <Link className="card-img-top d-block overflow-hidden" to="/shop">
             <img src={product.media.source} alt={product.name} /> </Link>
         <div className="card-body py-2">
-            <Link className="product-meta d-block fs-xs pb-1" to="#"> { displayCategories(product.categories) } </Link>
+          { 
+            product.categories ? (
+              <Link className="product-meta d-block fs-xs pb-1" to="#"> { displayCategories(product.categories) } </Link>
+            ) : null
+          }
             <h3 className="product-title fs-sm">
               <Link to="/shop">{product.name}</Link>
             </h3>
@@ -52,8 +56,8 @@ const Product = ({ product, onAddToCart }) => {
               <FiShoppingCart className="fs-sm me-1" />Add to Cart
             </button>
           <div className="text-center">
-              <Link className="nav-link-style fs-ms" to="#quick-view-electro" data-bs-toggle="modal">
-                  <FiEye className="align-middle me-1" /> Quick view
+              <Link className="nav-link-style fs-ms" to={`/product/${product.id}`}>
+                  <FiEye className="align-middle me-1" /> View Details
                 </Link>
             </div>
         </div>
