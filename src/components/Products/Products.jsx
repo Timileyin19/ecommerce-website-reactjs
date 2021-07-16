@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Grid } from '@material-ui/core';
 
 import Product from './Product/Product';
@@ -6,8 +6,39 @@ import useStyles from './styles';
 import Spinner from '../Utility/Spinner';
 import { Link } from 'react-router-dom';
 import { FiHome } from 'react-icons/fi';
+import { FaAngleLeft, FaAngleRight } from 'react-icons/fa';
 
 const Products = ({ products, onAddToCart }) => {
+    // Use for Pagination Sake
+    const dataLimit = 4;
+    const pageLimit = 3;
+    const pages = Math.round(products.length / dataLimit);
+    const [currentPage, setCurrentPage] = useState(1);
+
+    function goToNextPage() {
+        setCurrentPage((page) => page + 1);
+    }
+
+    function goToPreviousPage() {
+        setCurrentPage((page) => page - 1); 
+    }
+
+    function changePage(event) {
+        const pageNumber = Number(event.target.textContent);
+        setCurrentPage(pageNumber);
+     }
+
+    const getPaginatedData = () => {
+        const startIndex = currentPage * dataLimit - dataLimit;
+        const endIndex = startIndex + dataLimit;
+        return products.slice(startIndex, endIndex);
+    }
+
+    const getPaginationGroup = () => {
+        let start = Math.floor((currentPage - 1) / pageLimit) * pageLimit;
+        return new Array(pageLimit).fill().map((_, idx) => start + idx + 1);
+     };
+
     const classes = useStyles();
 
     if (!products.length) return <Spinner />
@@ -49,10 +80,10 @@ const Products = ({ products, onAddToCart }) => {
                 </Link>
             </div>
                 <div className="d-flex">
-                    <Link className="nav-link-style me-3" to="#">
+                    <Link className={`nav-link-style me-3 ${currentPage === 1 ? 'disabled' : ''}`} to="#" onClick={goToPreviousPage}>
                         &#60;&nbsp;
-                    </Link><span className="fs-md">1 / 5</span>
-                    <Link className="nav-link-style ms-3" to="#">
+                    </Link><span className="fs-md">{`${currentPage} / ${pages}`}</span>
+                    <Link className={`nav-link-style ms-3 ${currentPage === pages ? 'disabled' : ''}`} to="#" onClick={goToNextPage}>
                         &#62;
                     </Link>
                 </div>
@@ -60,10 +91,37 @@ const Products = ({ products, onAddToCart }) => {
         </div>
 
         <div className="row pt-3 mx-n2">
-            { products.map((product) => (
-               <Product key={product.id} product={product} onAddToCart={onAddToCart} /> 
+            { getPaginatedData().map((product, index) => (
+                <Product key={index} product={product} onAddToCart={onAddToCart} />
             )) }
         </div>
+        <hr className="my-3" />
+
+        <nav className="d-flex justify-content-between pt-2" aria-label="Page navigation">
+            <ul className="pagination">
+                <li className="page-item">
+                    <Link className="page-link" to="#">
+                        <FaAngleLeft className="me-2" /> Prev
+                    </Link>
+                </li>
+            </ul>
+            <ul className="pagination">
+                <li className="page-item d-sm-none"><span className="page-link page-link-static">{`${currentPage} / ${pages}`}</span></li>
+
+                {getPaginationGroup().map((item, index) => (
+                    <li className={`page-item ${currentPage === item ? 'active' : null} d-none d-sm-block`} key={index} onClick={changePage}>
+                        <Link className="page-link" to="#">{item}</Link>
+                    </li>
+                ))}
+            </ul>
+            <ul className="pagination">
+                <li className="page-item">
+                    <Link className="page-link" to="#" aria-label="Next">Next <FaAngleRight className="ms-2" /> 
+                    </Link>
+                </li>
+            </ul>
+            </nav>
+
 
         </div>
         </>

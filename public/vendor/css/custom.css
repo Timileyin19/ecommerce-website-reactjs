@@ -17,3 +17,9 @@
 .btn-social > svg {
   line-height: 2.125rem;
 }
+
+.disabled {
+  pointer-events: none;
+  box-shadow: none;
+  color: #999;
+}

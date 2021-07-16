@@ -1,15 +1,14 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import Product from '../../Products/Product/Product';
 import { FiArrowRight } from "react-icons/fi";
 import Spinner from '../../Utility/Spinner';
 
 const TrendingProducts = ({ products, onAddToCart }) => {
-    const [trendingProducts, setTrendingProducts] = useState([]);
-
+    
     const generateRandomProducts = () => {
         if (products.length <= 8) {
-            setTrendingProducts(products);
+            return products;
         } else {
             let indexArray = [];
             for(let i = 0; i < 8; i++) {
@@ -25,14 +24,14 @@ const TrendingProducts = ({ products, onAddToCart }) => {
             for (let k = 0; k < indexArray.length; k++) {
                 trendyingProd.push(products[indexArray[k]]);
             }
-            setTrendingProducts(trendyingProd);
+            return trendyingProd;
         }
         
     }
+    const trendingProducts = generateRandomProducts()
     
-    useEffect(() => {
-        generateRandomProducts();
-      }, []);
+
+      if (!trendingProducts) return <Spinner />
 
     return (
         <>
