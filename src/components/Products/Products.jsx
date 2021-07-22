@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Grid } from '@material-ui/core';
 
 import Product from './Product/Product';
 import useStyles from './styles';
 import Spinner from '../Utility/Spinner';
+import PageTitle from '../Utility/PageTitle';
 import { Link } from 'react-router-dom';
 import { FiHome } from 'react-icons/fi';
 import { FaAngleLeft, FaAngleRight } from 'react-icons/fa';
@@ -39,6 +40,11 @@ const Products = ({ products, onAddToCart }) => {
         return new Array(pageLimit).fill().map((_, idx) => start + idx + 1);
      };
 
+     // note that useEffect method is called whenever the State change 
+     useEffect(() => {
+        window.scrollTo({ behavior: 'smooth', top: '0px' });
+      }, [currentPage]);
+
     const classes = useStyles();
 
     if (!products.length) return <Spinner />
@@ -46,28 +52,8 @@ const Products = ({ products, onAddToCart }) => {
     return (
         <>
         <div className="bg-dark pt-4 pb-5">
-            <div className="container pt-2 pb-3 pt-lg-3 pb-lg-4">
-                <div className="d-lg-flex justify-content-between pb-3">
-                <div className="order-lg-2 mb-3 mb-lg-0 pt-lg-2">
-                    <nav aria-label="breadcrumb">
-                    <ol className="breadcrumb breadcrumb-light flex-lg-nowrap justify-content-center justify-content-lg-start">
-                        <li className="breadcrumb-item">
-                            <Link className="text-nowrap" to="/">
-                                <FiHome />&nbsp;Home</Link>
-                        </li>
-                        <li className="breadcrumb-item text-nowrap">
-                            <Link to="#"> &#62;&nbsp; Shop</Link>
-                        </li>
-                        <li className="breadcrumb-item text-nowrap active" aria-current="page">&#62;&nbsp; Product Page</li>
-                    </ol>
-                    </nav>
-                </div>
-                <div className="order-lg-1 pe-lg-4 text-center text-lg-start">
-                    <h1 className="h3 text-light mb-0">Products Page</h1>
-                </div>
-                </div>
-            </div>
-            </div>
+            <PageTitle prevPage="Shop" prevPageLink="/shop" title="Product Page" heading="Products Page" />
+        </div>
 
 
 
@@ -100,7 +86,7 @@ const Products = ({ products, onAddToCart }) => {
         <nav className="d-flex justify-content-between pt-2" aria-label="Page navigation">
             <ul className="pagination">
                 <li className="page-item">
-                    <Link className="page-link" to="#">
+                    <Link className="page-link" to="#" onClick={goToPreviousPage}>
                         <FaAngleLeft className="me-2" /> Prev
                     </Link>
                 </li>
@@ -116,7 +102,7 @@ const Products = ({ products, onAddToCart }) => {
             </ul>
             <ul className="pagination">
                 <li className="page-item">
-                    <Link className="page-link" to="#" aria-label="Next">Next <FaAngleRight className="ms-2" /> 
+                    <Link className="page-link" to="#" aria-label="Next" onClick={goToNextPage}>Next <FaAngleRight className="ms-2" /> 
                     </Link>
                 </li>
             </ul>

@@ -1,9 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { CssBaseline, Paper, Stepper, Step, StepLabel, Typography, CircularProgress, Divider, Button } from '@material-ui/core';
 import { Link, useHistory } from 'react-router-dom';
+import { FiHome, FiPocket, FiCreditCard } from 'react-icons/fi';
+import Spinner from '../../Utility/Spinner';
+
+import Cards_alt from '../../../assests/img/cards-alt.png';
 
 import { commerce } from '../../../api/commerce';
 import useStyles from './styles';
+import DetailsForm from '../DetailsForm';
 import AddressForm from '../AddressForm';
 import PaymentForm from '../PaymentForm';
 
@@ -13,12 +18,17 @@ const Checkout = ({ cart, onCaptureCheckout, order, error }) => {
     const [activeStep, setActiveStep] = useState(0);
     const [checkoutToken, setCheckoutToken] = useState(null);
     const [shippingData, setShippingData] = useState({})
+    const [item, setItem] = useState({});
+
+    
 
     const classes = useStyles();
     const history = useHistory();
 
     const nextStep = () => setActiveStep((prevActiveStep) => prevActiveStep + 1);
     const backStep = () => setActiveStep((prevActiveStep) => prevActiveStep - 1);
+
+    
 
     useEffect(() => {
         if (cart.id) {
@@ -79,9 +89,12 @@ const Checkout = ({ cart, onCaptureCheckout, order, error }) => {
     const Form = () => ((activeStep === 0) ? 
         <AddressForm checkoutToken={checkoutToken} submitData={submitData} /> : <PaymentForm checkoutToken={checkoutToken} nextStep={nextStep} backStep={backStep} shippingData={shippingData} onCaptureCheckout={onCaptureCheckout} />);
 
+
+
     return (
         <>
-            <CssBaseline />
+        <DetailsForm cart={cart} />
+            {/* <CssBaseline />
             <div className={classes.toolbar} />
             <main className={classes.layout}>
                 <Paper className={classes.paper}>
@@ -97,8 +110,8 @@ const Checkout = ({ cart, onCaptureCheckout, order, error }) => {
                     </Stepper>
                     { activeStep === steps.length ? <Confirmation /> : checkoutToken && <Form /> }
                 </Paper>
-            </main>
-            </>
+            </main> */}
+        </>
     );
 };
 

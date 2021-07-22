@@ -1,13 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { CssBaseline } from '@material-ui/core';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
 import { commerce } from './api/commerce';
 
-import { Navbar, Products , Cart, Checkout, SigninModal, Landing, ProductDetails, Footer } from './components';
+import { Navbar, Products , Cart, Checkout, SigninModal, Landing, ProductDetails, PaymentMethods, CheckoutComplete, Footer } from './components';
 
 const App = () => {
-  const [mobileOpen, setMobileOpen] = useState(false);
   const [products, setProducts] = useState([]);
   const [cart, setCart] = useState({});
   const [order, setOrder] = useState({});
@@ -61,7 +59,6 @@ const App = () => {
 
       refreshCart();
     } catch(error) {
-      // setErrorMessage(error.data.error);
       setErrorMessage(error.data.error.message);
     }
   };
@@ -86,13 +83,9 @@ const App = () => {
     fectchProducts();
   }, []);
 
-  const handleDrawerToggle = () => setMobileOpen(!mobileOpen);
-
   return (
     <main className="page-wrapper">
       <Router>
-        {/* <div style={{ display: 'flex' }}> */}
-        {/* <CssBaseline /> */}
         <SigninModal />
         <Navbar cart={cart} handleRemoveFromCartWithItemName={handleRemoveFromCartWithItemName} />
         <Switch>
@@ -108,15 +101,22 @@ const App = () => {
           <Route exact path="/cart">
             <Cart cart={cart} onUpdateCartQty={handleUpdateCartQty} onRemoveFromCart={handleRemoveFromCart} onEmptyCart={handleEmptyCart} />
           </Route>
+
+          {/* checkout URLs */}
           <Route exact path="/checkout">
             <Checkout cart={cart} order={order} onCaptureCheckout={handleCaptureCheckout} error={errorMessage} />
+          </Route>
+          <Route exact path="/checkout/payment">
+              <PaymentMethods cart={cart} />
+          </Route>
+          <Route exact path="/checkout/complete">
+              <CheckoutComplete onEmptyCart={handleEmptyCart} />
           </Route>
           <Route path='*'>
               { 'Not found page' }
           </Route>
         </Switch>
         <Footer />
-        {/* </div> */}
       </Router>
     </main>
   );

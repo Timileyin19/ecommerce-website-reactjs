@@ -13,13 +13,16 @@
   align-items: center;
   justify-content: center;
 }
-
 .btn-social > svg {
   line-height: 2.125rem;
 }
-
 .disabled {
   pointer-events: none;
   box-shadow: none;
   color: #999;
+}
+.btn-outline-accent2:hover {
+  color: #fff;
+  background-color: #e62121;
+  border-color: #f011115f;
 }

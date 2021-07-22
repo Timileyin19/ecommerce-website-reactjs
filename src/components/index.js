@@ -7,3 +7,5 @@ export { default as QuickViewModal } from './Modals/QuickViewModal';
 export { default as Landing } from './Landing/Landing';
 export { default as ProductDetails } from './Products/Product/ProductDetails';
 export { default as Footer } from './Footer/Footer';
+export { default as PaymentMethods } from './CheckoutForm/PaymentMethods';
+export { default as CheckoutComplete } from './CheckoutForm/CheckoutComplete';
