@@ -66,7 +66,7 @@ const App = () => {
   const handleRemoveFromCartWithItemName = (item_name) => {
     let item_id;
     let newItemName = item_name.slice(0, -1);
-    cart.line_items.map((item) => {
+    cart.line_items.forEach((item) => {
       if (item.name === newItemName) {
         item_id = item.id
       }

@@ -1,18 +1,12 @@
 import React from 'react';
-import { Container, Typography, Button, Grid  } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 import Spinner from '../Utility/Spinner';
 import { FiTrash2, FiCreditCard, FiShoppingCart } from 'react-icons/fi';
 import { FaAngleLeft } from 'react-icons/fa';
 import PageTitle from '../Utility/PageTitle';
-
-
 import CartItem from './CartItem/CartItem';
-import useStyles from './styles';
 
 function Cart({ cart, onUpdateCartQty, onRemoveFromCart, onEmptyCart }) {
-    const classes = useStyles();
-
     const handleEmptyCart = () => onEmptyCart();
 
     const renderEmptyCart = () => (
