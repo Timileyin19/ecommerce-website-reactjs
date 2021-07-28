@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom';
 import { FiArrowRight } from "react-icons/fi";
 
 const PromoBanner = ({ products }) => {
-    const [day, setDay] = useState('');
     const [hour, setHour] = useState('');
     const [minute, setMinute] = useState('');
     const [second, setSecond] = useState('');
@@ -22,7 +21,6 @@ const PromoBanner = ({ products }) => {
         const currentTime = new Date();
         const diff = promoEndTime - currentTime;
       
-        setDay(Math.floor(diff / 1000 / 60 / 60 / 24));
         setHour(Math.floor(diff / 1000 / 60 / 60) % 24);
         setMinute(Math.floor(diff / 1000 / 60) % 60);
         setSecond(Math.floor(diff / 1000) % 60);
@@ -48,7 +46,6 @@ const PromoBanner = ({ products }) => {
                             <h2 className="mb-1">{product.name}</h2>
                             <p className="h5 text-body fw-light">at discounted price. Hurry up!</p>
                             <div className="countdown py-2 h4" data-countdown="07/01/2021 07:00:00 PM">
-                                {/* <div className="countdown-days"><span className="countdown-value" /><span className="countdown-label text-muted">{day} <small>&nbsp;Days</small> </span></div> */}
                                 <div className="countdown-hours"><span className="countdown-value" /><span className="countdown-label text-muted">{hour} <small>&nbsp;Hours</small> </span></div>
                                 <div className="countdown-minutes"><span className="countdown-value" /><span className="countdown-label text-muted">{minute} <small>&nbsp;Minutes</small> </span></div>
                                 <div className="countdown-seconds"><span className="countdown-value" /><span className="countdown-label text-muted">{second} <small>&nbsp;Seconds</small> </span></div>
@@ -57,6 +54,7 @@ const PromoBanner = ({ products }) => {
                                 <FiArrowRight className="fs-ms ms-1" /></Link>
                             </div>
                         </div>
+
                         <div className="col-md-7">
                             <img src={product.media.source} alt={product.name} /></div>
                         </div>

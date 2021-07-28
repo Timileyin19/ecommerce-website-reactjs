@@ -7,7 +7,7 @@ import Spinner from '../../Utility/Spinner';
 const TrendingProducts = ({ products, onAddToCart }) => {
     
     const generateRandomProducts = () => {
-        if (products.length <= 8) {
+        if (products.length < 9) {
             return products;
         } else {
             let indexArray = [];

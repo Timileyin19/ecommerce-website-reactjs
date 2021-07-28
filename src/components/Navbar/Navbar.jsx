@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Menu, MenuItem, IconButton, Badge, AppBar, Typography } from '@material-ui/core';
-import { ShoppingCartRounded } from '@material-ui/icons';
-import { Link, useLocation } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { FaSearch } from "react-icons/fa";
 import { FiMenu, FiUser, 
     FiShoppingCart, FiArrowRightCircle, 
@@ -11,16 +9,9 @@ import Toolbar from './Toolbar/Toolbar';
 import CartDropdown from './CartDropdown/CartDropdown';
 
 import logo from '../../assests/LogoDark.png';
-import useStyles from './styles';
 
 const PrimarySearchBar = ({ cart, handleRemoveFromCartWithItemName }) => {
-    const [mobileMoreAnchorE1, setMobileMoreAnchorE1] = useState(null);
     const [subtotal, setSubtotal] = useState(null);
-    const location = useLocation();
-    const classes = useStyles();
-    const isMobileMenuOpen = Boolean(mobileMoreAnchorE1)
-    const mobileMenuId = 'primary-search-account-menu-mobile';
-    const handleMobileMenuClose = () => setMobileMoreAnchorE1(null)
 
     useEffect(() => {
       const setItemSubtotal = () => {
@@ -34,31 +25,9 @@ const PrimarySearchBar = ({ cart, handleRemoveFromCartWithItemName }) => {
         }
       }
       setItemSubtotal();
-    }, [])
-
-
-
-    // const renderMobileMenu = (
-    //     <Menu
-    //         id={mobileMenuId}
-    //         anchorEl={mobileMoreAnchorE1}
-    //         anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
-    //         keepMounted
-    //         transformOrigin={{ vertical: 'top', horizontal: 'right' }}
-    //         open={isMobileMenuOpen}
-    //         onClose={handleMobileMenuClose}
-    //         >
-    //             <MenuItem>
-    //                 <IconButton component={Link} to="/cart" aria-label="Show cart items" color="inherit">
-    //                     <Badge badgeContent={cart.totalItems} color="secondary">
-    //                         <ShoppingCartRounded />
-    //                     </Badge>
-    //                 </IconButton>
-    //                 <p>Cart</p>
-    //             </MenuItem>
-    //     </Menu>
-    // );
+    }, [cart])
     
+
     return (
          <header className="shadow-sm">
         <Toolbar />
@@ -151,54 +120,30 @@ const PrimarySearchBar = ({ cart, handleRemoveFromCartWithItemName }) => {
           </ul>
           {/* Primary menu*/}
           <ul className="navbar-nav">
-            <li className="nav-item dropdown active">
-                <Link className="nav-link dropdown-toggle" to="#">Home</Link>
+            <li className="nav-item active">
+                <Link className="nav-link" to="/">Home</Link>
              </li>
-            <li className="nav-item dropdown">
-                <Link className="nav-link dropdown-toggle" to="/shop">Shop</Link>
+            <li className="nav-item">
+                <Link className="nav-link" to="/shop">Shop</Link>
             </li>
-            <li className="nav-item dropdown">
-                <Link className="nav-link dropdown-toggle" to="#">Account</Link>
+            {/* <li className="nav-item">
+                <Link className="nav-link" to="/">Account</Link>
             </li>
-            <li className="nav-item dropdown">
-                <Link className="nav-link dropdown-toggle" to="#">About Us</Link>
+            <li className="nav-item">
+                <Link className="nav-link" to="/">About Us</Link>
              </li>
-            <li className="nav-item dropdown">
-                <Link className="nav-link dropdown-toggle" to="#">Blog</Link>
+            <li className="nav-item">
+                <Link className="nav-link" to="/">Blog</Link>
              </li>
-            <li className="nav-item dropdown">
-                <Link className="nav-link dropdown-toggle" to="#">Contact Us</Link>
-             </li>
+            <li className="nav-item">
+                <Link className="nav-link" to="#">Contact Us</Link>
+             </li> */}
           </ul>
         </div>
       </div>
     </div>
   </div>
 </header>
-
-
-
-
-        // <>
-        //     <AppBar position="fixed" className={classes.appBar} color="inherit">
-        //         <Toolbar>
-        //             <Typography component={Link} to="/" variant="h6" className={classes.title} color="inherit">
-        //                 <img src={logo} alt="TIMMYSHOP" height="25px" className={classes.image} /> TimmyShop
-        //             </Typography>
-        //             <div className={classes.grow} />
-        //             { location.pathname === '/' && (
-        //                 <div className={classes.button}>
-        //                     <IconButton component={Link} to="/cart" aria-label="Show cart items" color="inherit">
-        //                         <Badge badgeContent={totalItems} color="secondary">
-        //                             <ShoppingCartRounded />
-        //                         </Badge>
-        //                     </IconButton>
-        //                 </div>
-        //             )}
-        //         </Toolbar>
-        //     </AppBar>
-        //     {renderMobileMenu}
-        // </>
     );
 };
 

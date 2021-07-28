@@ -3,7 +3,7 @@ import PageTitle from '../Utility/PageTitle';
 import Spinner from '../Utility/Spinner';
 import { Link, useHistory } from 'react-router-dom';
 import { FiShoppingCart } from 'react-icons/fi';
-import { FaRegUserCircle, FaShippingFast, FaAngleRight, FaRegCreditCard, FaRegCheckCircle, FaAngleLeft } from 'react-icons/fa';
+import { FaRegUserCircle, FaAngleRight, FaRegCreditCard, FaAngleLeft } from 'react-icons/fa';
 import UserInfo from '../User/UserInfo';
 import OrderSummary from './OrderSummary';
 import { commerce } from '../../api/commerce';
@@ -68,11 +68,6 @@ useEffect(() => {
 useEffect(() => {
     if (shippingSubdivision) fetchShippingOptions(checkoutToken.id, shippingCountry, shippingSubdivision);
 }, [checkoutToken, shippingSubdivision, shippingCountry]);
-
-
-
-
-
 
 
 

@@ -7,7 +7,7 @@ const CheckoutComplete = ({ onEmptyCart }) => {
     useEffect(() => {
         onEmptyCart();
         setOrderId(Math.floor(Math.random() * 100000000))
-    }, [])
+    }, [onEmptyCart])
     
 
     return (
