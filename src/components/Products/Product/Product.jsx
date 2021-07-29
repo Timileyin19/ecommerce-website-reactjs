@@ -39,7 +39,7 @@ const Product = ({ product, onAddToCart }) => {
             ) : null
           }
             <h3 className="product-title fs-sm">
-              <Link to="/shop">{product.name}</Link>
+              <Link to={`/product/${product.id}`}>{product.name}</Link>
             </h3>
           <div className="d-flex justify-content-between">
             <div className="product-price">

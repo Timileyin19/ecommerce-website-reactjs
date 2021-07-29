@@ -3,10 +3,9 @@ import { Link } from 'react-router-dom';
 import { FaHome } from 'react-icons/fa';
 
 const CheckoutComplete = ({ onEmptyCart }) => {
-    const [orderId, setOrderId] = useState(0);
+    const orderId = "23p2038xVas37937";
     useEffect(() => {
         onEmptyCart();
-        setOrderId(Math.floor(Math.random() * 100000000))
     }, [onEmptyCart])
     
 

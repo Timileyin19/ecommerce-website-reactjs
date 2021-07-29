@@ -83,7 +83,7 @@ const Products = ({ products, onAddToCart }) => {
         <nav className="d-flex justify-content-between pt-2" aria-label="Page navigation">
             <ul className="pagination">
                 <li className="page-item">
-                    <Link className="page-link" to="#" onClick={goToPreviousPage}>
+                    <Link className={`page-link ${currentPage === 1 ? 'disabled' : ''}`} to="#" onClick={goToPreviousPage}>
                         <FaAngleLeft className="me-2" /> Prev
                     </Link>
                 </li>
@@ -99,7 +99,7 @@ const Products = ({ products, onAddToCart }) => {
             </ul>
             <ul className="pagination">
                 <li className="page-item">
-                    <Link className="page-link" to="#" aria-label="Next" onClick={goToNextPage}>Next <FaAngleRight className="ms-2" /> 
+                    <Link className={`page-link ${currentPage === pages ? 'disabled' : ''}`} to="#" aria-label="Next" onClick={goToNextPage}>Next <FaAngleRight className="ms-2" /> 
                     </Link>
                 </li>
             </ul>

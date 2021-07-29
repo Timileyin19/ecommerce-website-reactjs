@@ -47,16 +47,9 @@ const PrimarySearchBar = ({ cart, handleRemoveFromCartWithItemName }) => {
           <input className="form-control rounded-start w-100" type="text" placeholder="Search for products" />
           <select className="form-select flex-shrink-0" style={{width: '10.5rem'}}>
             <option>All categories</option>
-            <option>Cameras</option>
-            <option>Computers</option>
-            <option>Data Storage</option>
-            <option>Headphones</option>
-            <option>Home Music</option>
-            <option>Printers</option>
-            <option>Smartphones</option>
-            <option>TV, Video, Audio</option>
-            <option>Video Games</option>
-            <option>Wearables</option>
+            <option>Phone Accessories</option>
+            <option>Electronics</option>
+            <option>Home Gadget</option>
           </select>
         </div>
         <div className="navbar-toolbar d-flex flex-shrink-0 align-items-center">
@@ -69,10 +62,11 @@ const PrimarySearchBar = ({ cart, handleRemoveFromCartWithItemName }) => {
                 </div>
             </Link>
             <Link className="navbar-tool ms-1 ms-lg-0 me-n1 me-lg-2" to="#signin-modal" data-bs-toggle="modal">
-            <div className="navbar-tool-icon-box">
-                <FiUser className="navbar-tool-icon" />
-            </div>
-            <div className="navbar-tool-text ms-n3"><small>Hello, Sign in</small>My Account</div></Link>
+              <div className="navbar-tool-icon-box">
+                  <FiUser className="navbar-tool-icon" />
+              </div>
+              <div className="navbar-tool-text ms-n3"><small>Hello, Sign in</small>My Account</div>
+            </Link>
           <div className="navbar-tool dropdown ms-3">
               <Link className="navbar-tool-icon-box bg-secondary dropdown-toggle" to="/cart">
                   { cart.total_items ? (<span className="navbar-tool-label"> { cart.total_items } </span>) : null }
